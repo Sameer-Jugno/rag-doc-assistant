@@ -7,7 +7,7 @@ pypdf
 langchain-text-splitters
 rank-bm25
 pymupdf
-git 
+
 # Vector Database Client
 qdrant-client
 
@@ -16,5 +16,5 @@ google-genai
 cohere
 
 # Machine Learning & Embeddings (BGE-M3 Support)
-# sentence-transformers
-# torch
+sentence-transformers
+torch
