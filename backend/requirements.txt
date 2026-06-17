@@ -1,6 +1,7 @@
 # Web Framework & Server
 fastapi
 uvicorn
+pydantic 
 
 # Document Parsing & Chunking
 pypdf
@@ -18,3 +19,8 @@ cohere
 # Machine Learning & Embeddings (BGE-M3 Support)
 sentence-transformers
 torch
+google-genai
+
+# Frontend 
+streamlit 
+requests 
