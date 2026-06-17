@@ -1,8 +1,8 @@
 import os
 import pickle
-from embeddings import get_embeddings
-from vector_db import query_vector_db
-from sparse_retriever import query_bm25
+from app.services.embeddings import get_embeddings
+from app.services.vector_db import query_vector_db
+from app.services.sparse_retriever import query_bm25
 
 BM25_STORAGE_PATH = "../data/bm25_index.pkl"
 

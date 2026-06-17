@@ -1,9 +1,9 @@
 import time
 import uuid
 from qdrant_client.models import PointStruct
-from ingestion import extract_text_from_pdfs, chunk_documents
-from embeddings import get_embeddings
-from vector_db import init_vector_db, client
+from app.services.ingestion import extract_text_from_pdfs, chunk_documents
+from app.services.embeddings import get_embeddings
+from app.services.vector_db import init_vector_db, client
 
 def run_ingestion_pipeline(data_dir: str):
     print("\n" + "="*60)

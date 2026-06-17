@@ -1,7 +1,7 @@
 import os
 from google import genai
 from dotenv import load_dotenv
-from hybrid_retriever import computing_rrf
+from app.services.hybrid_retriever import computing_rrf
 
 load_dotenv()
 
@@ -39,4 +39,4 @@ if __name__ == "__main__":
         print(answer)
         print("=" * 60)
     except Exception as e:
-        print("\n❌ Error connecting to Gemini API:", e)
+        print("\nError connecting to Gemini API:", e)
