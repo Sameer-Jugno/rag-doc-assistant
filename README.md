@@ -1,0 +1,1 @@
+Production-grade RAG assistant built with FastAPI, Streamlit, Qdrant, and Gemini.

@@ -1,0 +1,26 @@
+# Web Framework & Server
+fastapi
+uvicorn
+pydantic 
+
+# Document Parsing & Chunking
+pypdf
+langchain-text-splitters
+rank-bm25
+pymupdf
+
+# Vector Database Client
+qdrant-client
+
+# AI & LLM SDKs
+google-genai
+cohere
+
+# Machine Learning & Embeddings (BGE-M3 Support)
+sentence-transformers
+torch
+google-genai
+
+# Frontend 
+streamlit 
+requests 

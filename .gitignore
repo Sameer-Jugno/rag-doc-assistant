@@ -1,0 +1,7 @@
+VirtualEnv/
+__pycache__/
+*.pyc
+.vscode/
+qdrant_storage/
+*.pkl
+.env
