@@ -2,7 +2,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 from app.services.embeddings import get_embeddings
 
-client = QdrantClient(url="http://localhost:6333")
+client = QdrantClient(url="http://127.0.0.1:6333")
 
 def init_vector_db(collection_name):
     existing_collections = [collection.name for collection in client.get_collections().collections]

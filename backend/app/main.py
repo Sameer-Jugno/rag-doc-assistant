@@ -20,7 +20,15 @@ def home():
 
 @app.post("/api/query")
 def query_response(request: QueryRequest): 
-    result = generate_response(query=request.question, top_k=request.top_k)
-    return {
-        "answer": result
-    }
+
+    try : 
+        result = generate_response(query=request.question, top_k=request.top_k)
+        return {
+            "answer": result
+        }
+    except Exception as e:
+        # Pulls the raw python crash string and sends it over the network to your screen
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"❌ INTERNAL SERVER ERROR TRACE:\n{error_details}")
+        raise HTTPException(status_code=500, detail=f"Backend Crash Reason: {str(e)}")
