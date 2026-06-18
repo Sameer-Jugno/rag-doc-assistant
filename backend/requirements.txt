@@ -24,3 +24,5 @@ google-genai
 # Frontend 
 streamlit 
 requests 
+
+python-dotenv

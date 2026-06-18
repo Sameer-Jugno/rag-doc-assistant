@@ -1,9 +1,9 @@
 import os
 import requests
 import streamlit as st
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 # 1. Page Configuration and Layout
 st.set_page_config(
@@ -46,6 +46,7 @@ for message in st.session_state.messages:
 def query_rag_backend(question_str: str, k_val: int) -> str:
     base_url = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
     backend_url = f"{base_url}/api/query"
+
     payload = {
         "question": question_str,
         "top_k": k_val

@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # 🏢 Service 1: The Vector Database Server
+  qdrant_db:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_container
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+  # 🎨 Service 2: The Interactive User Chat Dashboard UI
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: streamlit_frontend
+    ports:
+      - "8501:8501"
+    network_mode: "host"
+    environment:
+      - BACKEND_URL=http://127.0.0.1:8000
