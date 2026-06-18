@@ -4,3 +4,4 @@ __pycache__/
 .vscode/
 qdrant_storage/
 *.pkl
+.env

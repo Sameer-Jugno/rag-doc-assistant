@@ -1,6 +1,6 @@
 from qdrant_client import QdrantClient 
 from qdrant_client.models import Distance, VectorParams
-from embeddings import get_embeddings
+from app.services.embeddings import get_embeddings
 
 client = QdrantClient(url="http://localhost:6333")
 
@@ -21,9 +21,6 @@ def init_vector_db(collection_name):
         print("Database Response:", collection_response)
         return collection_response
 
-    # This calls the running Docker database API to fetch existing vector tables
-    # collections_response = client.get_collections()
-    
 def query_vector_db(query_vector: list, collection_name: str = "financial_reports", top_k: int = 5) -> list:
     results = client.query_points(
         collection_name=collection_name, 

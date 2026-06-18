@@ -1,7 +1,8 @@
-import streamlit as st
+import os
 import requests
-import os                        # New import
-from dotenv import load_dotenv 
+import streamlit as st
+from dotenv import load_dotenv
+
 load_dotenv()
 
 # 1. Page Configuration and Layout
@@ -19,7 +20,6 @@ with st.sidebar:
     st.header("⚙️ Retrieval Configurations")
     st.write("Tune how many relevant document chunks are fed into the LLM context brain.")
     
-    # User slider to dynamically adjust the top_k parameter
     top_k = st.slider(
         label="Select Top-K Chunks Density",
         min_value=1,
@@ -34,7 +34,6 @@ with st.sidebar:
     st.success("Gemini API Connected")
 
 # 3. Initialize Persistent Conversation Memory State
-# This ensures past text logs do not wipe out when the script refreshes
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -47,18 +46,14 @@ for message in st.session_state.messages:
 def query_rag_backend(question_str: str, k_val: int) -> str:
     base_url = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
     backend_url = f"{base_url}/api/query"
-
     payload = {
         "question": question_str,
         "top_k": k_val
     }
     try:
-        # Add this single line right here to debug the active URL path
-        print(f"📡 DEBUG: Streamlit is actively hitting: '{backend_url}'")
-        
+        print(f"DEBUG: Streamlit is actively hitting: '{backend_url}'")
         response = requests.post(backend_url, json=payload)
         if response.status_code == 200:
-            # Extract the raw answer string from your backend server JSON packet
             return response.json().get("answer", "⚠️ Error: Invalid response layout.")
         else:
             return f"❌ Server Error: Received HTTP status code {response.status_code}."
@@ -67,17 +62,13 @@ def query_rag_backend(question_str: str, k_val: int) -> str:
 
 # 6. Live Chat Input and Generation Workflow
 if user_query := st.chat_input("Ask a financial analysis question (e.g., What is NVIDIA's revenue growth?)..."):
-    
-    # A. Display user question instantly on screen and log to memory
     with st.chat_message("user"):
         st.markdown(user_query)
     st.session_state.messages.append({"role": "user", "content": user_query})
     
-    # B. Trigger server request pipeline with loading visual spinner
     with st.chat_message("assistant"):
         with st.spinner("🔍 Reviewing 10-K vectors and compiling financial analysis..."):
             ai_response = query_rag_backend(user_query, top_k)
             st.markdown(ai_response)
             
-    # C. Lock generated answer to memory logs
     st.session_state.messages.append({"role": "assistant", "content": ai_response})

@@ -10,17 +10,17 @@ app = FastAPI(
     description="Production web endpoints keeping document embedding models warm in memory."
 )
 
-class QueryRequest(BaseModel) : 
-    question : str 
-    top_k : int 
+class QueryRequest(BaseModel): 
+    question: str 
+    top_k: int = 3
 
 @app.get("/")
-def home() : 
+def home(): 
     return {"status": "healthy", "message": "Home page of rag-doc-assistant"}
 
 @app.post("/api/query")
-def query_response(request : QueryRequest) : 
+def query_response(request: QueryRequest): 
     result = generate_response(query=request.question, top_k=request.top_k)
     return {
-        "answer" : result
+        "answer": result
     }
